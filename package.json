@@ -1,0 +1,28 @@
+{
+  "name": "ticktick-pomodoro",
+  "version": "1.0.0",
+  "description": "1. node.js (環境) 2. type script",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SD19767/TickTick-Pomodoro.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SD19767/TickTick-Pomodoro/issues"
+  },
+  "homepage": "https://github.com/SD19767/TickTick-Pomodoro#readme",
+  "devDependencies": {
+    "@types/chrome": "^0.0.297",
+    "html-webpack-plugin": "^5.6.3",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.7.3",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1"
+  }
+}
