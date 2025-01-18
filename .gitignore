@@ -21,7 +21,7 @@ dist/
 webpack-stats.json
 
 # IDE Specific
-.vscode/
+# .vscode/ we love VSCode so we need to keep this
 .idea/
 .DS_Store
 
