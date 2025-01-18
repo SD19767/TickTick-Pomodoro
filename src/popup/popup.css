@@ -18,12 +18,13 @@ body {
     align-items: center;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     width: 300px;
+    position: relative;
   }
   
   /* 顯示時間 */
   .timer-display {
     font-size: 48px;
-    font-weight: bold;
+    font-weight: lighter;
     color: #fff; /* 白色文字 */
     margin-bottom: 20px;
   }
@@ -32,7 +33,7 @@ body {
   .timer-controllers {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 90%;
   }
   
   .control-button {
@@ -68,4 +69,18 @@ body {
     font-size: 24px;
     color: #fff; /* 白色標籤 */
     user-select: none;
+  }
+
+  .list-button{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .list-button .material-symbols-outlined {
+    font-size: 24px; /* 設置圖標大小 */
+    color: #fff; /* 設置圖標顏色為白色 */
   }
