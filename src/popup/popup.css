@@ -1,0 +1,71 @@
+/* 全域樣式 */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4; /* 淺灰背景 */
+  }
+  
+  .timer-container {
+    background-color: #f29223; /* 橙色背景 */
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    width: 300px;
+  }
+  
+  /* 顯示時間 */
+  .timer-display {
+    font-size: 48px;
+    font-weight: bold;
+    color: #fff; /* 白色文字 */
+    margin-bottom: 20px;
+  }
+  
+  /* 按鈕區域樣式 */
+  .timer-controllers {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .control-button {
+    background-color: #9d6223; /* 深棕色背景 */
+    border: none;
+    border-radius: 10px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+  }
+  
+  .control-button:hover {
+    background-color: #d17a1e; /* 懸停時的較亮棕色 */
+  }
+  
+  /* 列表按鈕樣式 */
+  .list-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Material Symbols 標籤樣式 */
+  .material-symbols-outlined {
+    font-size: 24px;
+    color: #fff; /* 白色標籤 */
+    user-select: none;
+  }
