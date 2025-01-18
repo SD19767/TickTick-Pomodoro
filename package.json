@@ -19,7 +19,9 @@
   "homepage": "https://github.com/SD19767/TickTick-Pomodoro#readme",
   "devDependencies": {
     "@types/chrome": "^0.0.297",
+    "css-loader": "^7.1.2",
     "html-webpack-plugin": "^5.6.3",
+    "mini-css-extract-plugin": "^2.9.2",
     "ts-loader": "^9.5.2",
     "typescript": "^5.7.3",
     "webpack": "^5.97.1",

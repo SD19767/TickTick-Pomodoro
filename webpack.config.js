@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     entry: {
@@ -18,6 +19,10 @@ module.exports = {
                 use: "ts-loader",
                 exclude: /node_modules/,
             },
+            {
+                test: /\.css$/i,
+                use: [MiniCssExtractPlugin.loader, "css-loader"], // 使用 MiniCssExtractPlugin.loader
+            },
         ],
     },
     resolve: {
@@ -29,7 +34,10 @@ module.exports = {
             filename: "popup.html",
             chunks: ["popup"], // 僅包含 popup.js
         }),
+        new MiniCssExtractPlugin({
+            filename: "[name].css", // 生成的 CSS 文件名
+        }),
     ],
     mode: "development",
-    devtool: "cheap-module-source-map", // 使用安全的 source map 模式
+    devtool: "cheap-module-source-map",
 };
