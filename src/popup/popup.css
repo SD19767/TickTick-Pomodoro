@@ -24,7 +24,7 @@ body {
   /* 顯示時間 */
   .timer-display {
     font-size: 48px;
-    font-weight: bold;
+    font-weight: lighter;
     color: #fff; /* 白色文字 */
     margin-bottom: 20px;
   }
