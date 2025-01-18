@@ -5,4 +5,5 @@
 
 ## 步驟
 1. 安裝 nvm https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating
-2. 
+2. npm install
+3. npx webpack 編譯

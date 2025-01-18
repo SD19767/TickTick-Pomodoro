@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "TickTick-Pomodoro",
+  "version": "1.0.0",
+  "description": "A simple Chrome extension with TypeScript",
+  "action": {
+      "default_popup": "dist/popup.html"
+  },
+  "background": {
+      "service_worker": "dist/background.js"
+  },
+  "content_scripts": [
+      {
+          "matches": ["<all_urls>"],
+          "js": ["dist/content.js"]
+      }
+  ],
+  "permissions": ["storage", "activeTab", "scripting"]
+}
