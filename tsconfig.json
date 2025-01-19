@@ -8,9 +8,21 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "typeRoots": ["node_modules/@types"],
-    "types": ["chrome"]
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": [
+      "chrome"
+    ]
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

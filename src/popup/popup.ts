@@ -1,3 +1,4 @@
+import '../components/timer/timer.ts';
 import './popup.css';
 
 document.addEventListener('DOMContentLoaded', () => {
