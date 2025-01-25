@@ -1,5 +1,4 @@
 import './popup.css';
-
 document.addEventListener('DOMContentLoaded', () => {
   const timerDisplay = document.getElementById('timer_display') as HTMLElement;
   const playButton = document.getElementById('play_button') as HTMLElement;
@@ -19,51 +18,28 @@ document.addEventListener('DOMContentLoaded', () => {
   chrome.storage.local.get(['timeRemaining', 'isRunning'], (result) => {
     if (result.timeRemaining !== undefined) {
       updateTimerDisplay(result.timeRemaining);
-    } else {
-      updateTimerDisplay(25 * 60); // 預設為 25 分鐘
     }
-
-    // if (result.isRunning) {
-    //   playButton.parentElement.style.display = 'none';
-    //   pauseButton.parentElement.style.display = 'inline-block';
-    // } else {
-    //   playButton.parentElement.style.display = 'inline-block';
-    //   pauseButton.parentElement.style.display = 'none';
-    // }
   });
 
   // 啟動計時器
   playButton.addEventListener('click', () => {
-    chrome.runtime.sendMessage(
-      { command: 'start', duration: 25 * 60 },
-      (response) => {
-        console.log(response.message);
-        // playButton.parentElement.style.display = 'none';
-        // pauseButton.parentElement.style.display = 'inline-block';
-      },
-    );
+    chrome.runtime.sendMessage({ command: 'start' }, (response) => {
+      console.log(response.message);
+    });
   });
 
   // 暫停計時器
   pauseButton.addEventListener('click', () => {
     chrome.runtime.sendMessage({ command: 'stop' }, (response) => {
       console.log(response.message);
-      // playButton.parentElement.style.display = 'inline-block';
-      // pauseButton.parentElement.style.display = 'none';
     });
   });
 
   // 重置計時器
   replayButton.addEventListener('click', () => {
-    chrome.runtime.sendMessage(
-      { command: 'start', duration: 25 * 60 },
-      (response) => {
-        console.log(response.message);
-        updateTimerDisplay(25 * 60);
-        // playButton.parentElement.style.display = 'none';
-        // pauseButton.parentElement.style.display = 'inline-block';
-      },
-    );
+    chrome.runtime.sendMessage({ command: 'reset' }, (response) => {
+      console.log(response.message);
+    });
   });
 
   // 實時監控時間變化

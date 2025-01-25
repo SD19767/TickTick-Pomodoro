@@ -1,12 +1,12 @@
 type TimerCallback = (timerRemaining: number) => void;
-
+const DEFAULT_DURATION = Math.floor(0.5 * 60);
 class Timer {
   private defaultDuration: number; // 預設時間(單位:秒)
   private timeRemaining: number; // 剩餘時間(單位:秒)
   private timerInterval: number | null; // 計時器 ID
   private isRunning: boolean; //是否正在運行
 
-  constructor(defaultDuration: number = 25 * 60) {
+  constructor(defaultDuration: number = DEFAULT_DURATION) {
     this.defaultDuration = defaultDuration;
     this.timeRemaining = defaultDuration;
     this.timerInterval = null;
@@ -21,17 +21,16 @@ class Timer {
     this.timerInterval = setInterval(() => {
       if (this.timeRemaining > 0) {
         this.timeRemaining--;
-        if (callback) callback(this.timeRemaining);
       } else {
         this.pause(); // 時間到後自動暫停
-        if (callback) callback(0);
       }
+      if (callback) callback(this.timeRemaining);
     }, 1000);
   }
 
   // 暫停計時器
   pause() {
-    if (this.timerInterval) {
+    if (this.timerInterval !== null) {
       clearInterval(this.timerInterval);
       this.timerInterval = null;
       this.isRunning = false;

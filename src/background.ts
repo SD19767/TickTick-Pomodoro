@@ -16,15 +16,6 @@ chrome.runtime.onStartup.addListener(() => {
   });
 });
 
-function notifyUser() {
-  chrome.notifications.create({
-    type: 'basic',
-    iconUrl: 'icon.png',
-    title: 'Pomodoro Finished!',
-    message: 'Time to take a break!',
-  });
-}
-
 function updateStorage() {
   chrome.storage.local.set({
     timeRemaining: timer.getRemainingTime(),
@@ -37,24 +28,30 @@ function startTimer() {
     updateStorage();
     if (timeRemaining <= 0) {
       stopTimer();
-      notifyUser();
+      console.log(`simulate notification when timer reaches 0`);
     }
   });
 }
 
 function stopTimer() {
   timer.pause();
-  updateStorage();
 }
-
+function resetTimer() {
+  timer.reset();
+}
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.command === 'start') {
-    const duration = request.duration || 25 * 60; // 預設時長
-    timer.reset(duration);
-    startTimer();
-    sendResponse({ message: 'Timer started', duration });
-  } else if (request.command === 'stop') {
-    stopTimer();
-    sendResponse({ message: 'Timer stopped' });
+  switch (request.command) {
+    case 'start':
+      startTimer();
+      sendResponse({ message: 'Timer started' });
+      break;
+    case 'stop':
+      stopTimer();
+      sendResponse({ message: 'Timer stopped' });
+    case 'reset':
+      resetTimer();
+      sendResponse({ message: 'Timer reset' });
+    default:
+      break;
   }
 });
