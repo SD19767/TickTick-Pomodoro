@@ -66,3 +66,16 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       break;
   }
 });
+// 監聽 storage 變化，在背景發送通知
+chrome.storage.onChanged.addListener((changes) => {
+  if (changes.state) {
+    if (changes.state.newValue == TimerState.Completed) {
+      chrome.notifications.create({
+        type: 'basic',
+        iconUrl: chrome.runtime.getURL('images/notification_icon.png'), // 使用 getURL 確保路徑正確
+        title: 'Pomodoro 完成!',
+        message: '該休息了，稍微放鬆一下吧。',
+      });
+    }
+  }
+});

@@ -3,8 +3,18 @@
     "name": "TickTick-Pomodoro",
     "version": "1.0.0",
     "description": "A simple Chrome extension with TypeScript",
+    "icons": {
+        "16": "images/icon-16.png",
+        "48": "images/icon-48.png",
+        "128": "images/icon-128.png"
+    },
     "action": {
-        "default_popup": "dist/popup.html"
+        "default_popup": "dist/popup.html",
+        "default_icon": {
+            "16": "images/icon-16.png",
+            "48": "images/icon-48.png",
+            "128": "images/icon-128.png"
+        }
     },
     "background": {
         "service_worker": "dist/background.js"
@@ -23,6 +33,17 @@
         "storage",
         "activeTab",
         "scripting",
-        "alarms"
+        "alarms",
+        "notifications"
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "images/notification_icon.png"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
     ]
 }
