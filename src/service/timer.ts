@@ -1,31 +1,38 @@
 type TimerCallback = (timeRemaining: number) => void;
+enum TimerState {
+  Idle = 'IDLE', // 計時器閒置
+  Running = 'RUNNING', // 計時中
+  Paused = 'PAUSED', // 暫停中
+  Completed = 'COMPLETED', // 計時完成
+}
 
-const DEFAULT_DURATION = 1500; // 預設 25 分鐘
+const DEFAULT_DURATION = Math.floor(20 * 0.5); // 預設 25 分鐘
 
 class Timer {
   private defaultDuration: number; // 預設時間 (單位: 秒)
   private timeRemaining: number; // 剩餘時間 (單位: 秒)
   private timerInterval: number | null; // 計時器 ID
-  private isRunning: boolean; // 是否正在運行
+  private state: TimerState; // 是否正在運行
 
   constructor(defaultDuration: number = DEFAULT_DURATION) {
     this.defaultDuration = defaultDuration;
     this.timeRemaining = defaultDuration;
     this.timerInterval = null;
-    this.isRunning = false;
+    this.state = TimerState.Idle;
   }
 
   // 啟動計時器
   start(callback?: TimerCallback) {
-    if (this.isRunning) return;
+    if (this.state === TimerState.Running) return;
 
-    this.isRunning = true;
+    this.state = TimerState.Running;
 
     this.timerInterval = setInterval(() => {
       if (this.timeRemaining > 0) {
         this.timeRemaining--;
       } else {
         this.pause(); // 時間到後自動暫停
+        this.state = TimerState.Completed;
       }
       if (callback) callback(this.timeRemaining);
     }, 1000);
@@ -36,7 +43,7 @@ class Timer {
     if (this.timerInterval !== null) {
       clearInterval(this.timerInterval);
       this.timerInterval = null;
-      this.isRunning = false;
+      this.state = TimerState.Paused;
     }
   }
 
@@ -45,7 +52,7 @@ class Timer {
     this.pause();
     this.timeRemaining =
       newDuration !== undefined ? newDuration : this.defaultDuration;
-    this.isRunning = false;
+    this.state = TimerState.Idle;
   }
 
   // 獲取剩餘時間
@@ -54,9 +61,9 @@ class Timer {
   }
 
   // 獲取是否正在運行
-  isTimerRunning(): boolean {
-    return this.isRunning;
+  GetTimerState(): TimerState {
+    return this.state;
   }
 }
 
-export default Timer;
+export { Timer, TimerState };
