@@ -48,6 +48,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (changes.state) {
       const state = changes.state.newValue as TimerState;
       updateUI(state);
+      // TODO:發通知
+      // if (state == TimerState.Completed) {
+      //   chrome.notifications.create({
+      //     type: 'basic',
+      //     iconUrl: 'icon.png',
+      //     title: 'Pomodoro 完成!',
+      //     message: '該休息了，稍微放鬆一下吧。',
+      //     priority: 2,
+      //   });
+      // }
     }
   });
   // 更新 UI 顯示時間
