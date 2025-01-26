@@ -1,23 +1,20 @@
-import Timer from './service/timer';
+import { Timer, TimerState } from './service/timer';
 const timer = new Timer();
 
 // Extension 安裝時初始化預設值
 chrome.runtime.onInstalled.addListener(() => {
   console.log('Extension Installed');
   chrome.storage.local.set({
-    timeRemaining: 1500, // 預設 25 分鐘
-    isRunning: false, // 預設不運行
+    timeRemaining: Math.floor(20 * 0.5), // 預設 25 分鐘
+    state: TimerState.Idle, // 預設狀態為 Idle
   });
 });
 
 // Extension 啟動時重置計時器狀態
 chrome.runtime.onStartup.addListener(() => {
-  chrome.storage.local.get(['timeRemaining', 'isRunning'], (result) => {
+  chrome.storage.local.get(['timeRemaining', 'state'], (result) => {
     if (result.timeRemaining && result.timeRemaining > 0) {
       timer.reset(result.timeRemaining);
-      if (result.isRunning) {
-        startTimer();
-      }
     }
   });
 });
@@ -26,7 +23,7 @@ chrome.runtime.onStartup.addListener(() => {
 function updateStorage() {
   chrome.storage.local.set({
     timeRemaining: timer.getRemainingTime(),
-    isRunning: timer.isTimerRunning(),
+    state: timer.GetTimerState(),
   });
 }
 
@@ -34,11 +31,6 @@ function updateStorage() {
 function startTimer() {
   timer.start((timeRemaining: number) => {
     updateStorage();
-    if (timeRemaining <= 0) {
-      stopTimer();
-      console.log('Timer finished. Simulating notification...');
-      // TODO:在時間結束後模擬通知
-    }
   });
 }
 
