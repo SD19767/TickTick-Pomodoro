@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pomodoro Timer</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
 <body>
-  <div class = "timer-container">
-    <div class = "timer-display">00:00</div>
+  <div class="timer-container">
+    <div class="timer-display" id="timer_display">00:00</div>
     <button class="list-button">
       <span class="material-symbols-outlined">format_list_bulleted</span>
-     </button>
-    <div class = "timer-controllers">
-      <button class="control-button">
+    </button>
+    <div class="timer-controllers">
+      <button class="control-button" id="play_button">
         <span class="material-symbols-outlined">play_arrow</span>
       </button>
-      <button class="control-button">
+      <button class="control-button" id="pause_button">
         <span class="material-symbols-outlined">pause</span>
       </button>
-      <button class="control-button">
+      <button class="control-button" id="replay_button">
         <span class="material-symbols-outlined">replay</span>
       </button>
     </div>
   </div>
   <script src="popup.js"></script>
 </body>
+
 </html>
