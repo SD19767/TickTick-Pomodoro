@@ -35,5 +35,15 @@
         "scripting",
         "alarms",
         "notifications"
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "images/notification_icon.png"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
     ]
 }
