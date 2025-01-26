@@ -1,4 +1,7 @@
 {
-  "recommendations": ["esbenp.prettier-vscode"],
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "plievone.vscode-template-literal-html" // es6-string-html 插件的 ID
+  ],
   "unwantedRecommendations": []
 }

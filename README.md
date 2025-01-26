@@ -16,8 +16,11 @@
 
 [TickTick Pomodoro.pdf](https://github.com/user-attachments/files/18463687/TickTick.Pomodoro.pdf)
 
+## 完成項目
+1. [x] 將現有的番茄鐘封裝成[Web Component](https://developer.mozilla.org/en-US/docs/Web/API/Web_components)
+2. [x] 倒數計時/重置/開始/暫停
 
-## 代辦項目
+## 待辦項目(優先順序由高到低)
 1. [ ] 跳通知
-2. [ ] 儲存每一次的番茄鐘
-3. [ ] 將現有popup.html封裝成web component
+2. [ ] 自訂番茄鐘時間
+3. [ ] 儲存每一次的番茄鐘
