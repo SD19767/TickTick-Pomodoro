@@ -1,10 +1,12 @@
-type TimerCallback = (timerRemaining: number) => void;
-const DEFAULT_DURATION = Math.floor(0.5 * 60);
+type TimerCallback = (timeRemaining: number) => void;
+
+const DEFAULT_DURATION = 1500; // 預設 25 分鐘
+
 class Timer {
-  private defaultDuration: number; // 預設時間(單位:秒)
-  private timeRemaining: number; // 剩餘時間(單位:秒)
+  private defaultDuration: number; // 預設時間 (單位: 秒)
+  private timeRemaining: number; // 剩餘時間 (單位: 秒)
   private timerInterval: number | null; // 計時器 ID
-  private isRunning: boolean; //是否正在運行
+  private isRunning: boolean; // 是否正在運行
 
   constructor(defaultDuration: number = DEFAULT_DURATION) {
     this.defaultDuration = defaultDuration;
@@ -13,6 +15,7 @@ class Timer {
     this.isRunning = false;
   }
 
+  // 啟動計時器
   start(callback?: TimerCallback) {
     if (this.isRunning) return;
 
