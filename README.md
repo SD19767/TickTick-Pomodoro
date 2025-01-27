@@ -20,7 +20,7 @@
 1. [x] 將現有的番茄鐘封裝成[Web Component](https://developer.mozilla.org/en-US/docs/Web/API/Web_components)
 2. [x] 倒數計時/重置/開始/暫停
 3. [x] 當倒數完成後跳通知
+4. [x] 自訂番茄鐘時間
 
 ## 待辦項目(優先順序由高到低)
-1. [ ] 自訂番茄鐘時間
 2. [ ] 儲存每一次的番茄鐘

@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   chrome.storage.local.get(['timeRemaining', 'state'], (result) => {
     let timeRemaining = result.timeRemaining;
     if (timeRemaining === undefined) {
-      timeRemaining = Math.floor(20 * 0.5); // 預設 25 分鐘
+      timeRemaining = Math.floor(25 * 60); // 預設 25 分鐘
       chrome.storage.local.set({ timeRemaining, state: TimerState.Idle });
     }
     updateTimerDisplay(timeRemaining);
