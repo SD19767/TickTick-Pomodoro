@@ -5,7 +5,7 @@ const timer = new Timer();
 chrome.runtime.onInstalled.addListener(() => {
   console.log('Extension Installed');
   chrome.storage.local.set({
-    timeRemaining: Math.floor(20 * 0.5), // 預設 25 分鐘
+    timeRemaining: Math.floor(25 * 60), // 預設 25 分鐘
     state: TimerState.Idle, // 預設狀態為 Idle
   });
 });
@@ -45,7 +45,10 @@ function resetTimer() {
   timer.reset();
   updateStorage();
 }
-
+function changeTime(secs: number) {
+  timer.changeTime(secs);
+  updateStorage();
+}
 // 監聽從 popup 傳來的消息並執行對應操作
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   switch (request.command) {
@@ -61,6 +64,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       resetTimer();
       sendResponse({ message: 'Timer reset' });
       break;
+    case 'changeTime':
+      changeTime(request.secs);
+      sendResponse({ message: 'Timer changeTime' });
     default:
       sendResponse({ message: 'Unknown command' });
       break;

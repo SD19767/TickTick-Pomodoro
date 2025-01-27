@@ -6,7 +6,7 @@ enum TimerState {
   Completed = 'COMPLETED', // 計時完成
 }
 
-const DEFAULT_DURATION = Math.floor(20 * 0.5); // 預設 25 分鐘
+const DEFAULT_DURATION = Math.floor(25 * 60); // 預設 25 分鐘
 
 class Timer {
   private defaultDuration: number; // 預設時間 (單位: 秒)
@@ -55,6 +55,11 @@ class Timer {
     this.state = TimerState.Idle;
   }
 
+  changeTime(newDuration: number) {
+    if (this.state == TimerState.Running) return;
+    this.defaultDuration = newDuration;
+    this.timeRemaining = newDuration;
+  }
   // 獲取剩餘時間
   getRemainingTime(): number {
     return this.timeRemaining;
