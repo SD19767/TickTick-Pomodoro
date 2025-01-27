@@ -55,6 +55,11 @@ class Timer {
     this.state = TimerState.Idle;
   }
 
+  changeTime(newDuration: number) {
+    if (this.state == TimerState.Running) return;
+    this.defaultDuration = newDuration;
+    this.timeRemaining = newDuration;
+  }
   // 獲取剩餘時間
   getRemainingTime(): number {
     return this.timeRemaining;

@@ -40,6 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log(response.message);
     });
   };
+
+  pomodoroTimer.onChangeTime = (secs: number) => {
+    chrome.runtime.sendMessage({ command: 'changeTime', secs }, (response) => {
+      console.log(response.message);
+    });
+  };
   // 監聽 storage 變化，實時更新時間顯示
   chrome.storage.onChanged.addListener((changes) => {
     if (changes.timeRemaining) {

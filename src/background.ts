@@ -45,7 +45,10 @@ function resetTimer() {
   timer.reset();
   updateStorage();
 }
-
+function changeTime(secs: number) {
+  timer.changeTime(secs);
+  updateStorage();
+}
 // 監聽從 popup 傳來的消息並執行對應操作
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   switch (request.command) {
@@ -61,6 +64,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       resetTimer();
       sendResponse({ message: 'Timer reset' });
       break;
+    case 'changeTime':
+      changeTime(request.secs);
+      sendResponse({ message: 'Timer changeTime' });
     default:
       sendResponse({ message: 'Unknown command' });
       break;

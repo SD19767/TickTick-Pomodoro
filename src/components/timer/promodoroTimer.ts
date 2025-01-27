@@ -1,6 +1,7 @@
 import { TimerState } from '../../service/timer';
 class PomodoroTimer extends HTMLElement {
-  timerDisplay: HTMLElement | null;
+  timerDisplayMinutes: HTMLInputElement | null;
+  timerDisplaySeconds: HTMLInputElement | null;
   playButton: HTMLElement | null;
   pauseButton: HTMLElement | null;
   replayButton: HTMLElement | null;
@@ -11,6 +12,7 @@ class PomodoroTimer extends HTMLElement {
   onStart: (() => void) | null = null;
   onPause: (() => void) | null = null;
   onReset: (() => void) | null = null;
+  onChangeTime: ((secs: number) => void) | null = null;
 
   constructor() {
     super();
@@ -98,7 +100,9 @@ class PomodoroTimer extends HTMLElement {
           }
         </style>
         <div class="timer-container">
-          <div class="timer-display" id="timer_display">00:00</div>
+          <div class="timer-display">
+            <input type="number" id="mins" />:<input type="number" id="secs" />
+          </div>
           <button class="list-button">
             <span class="material-symbols-outlined">format_list_bulleted</span>
           </button>
@@ -118,7 +122,8 @@ class PomodoroTimer extends HTMLElement {
     // 附加模板到 shadow DOM
     this.shadowRoot?.appendChild(template.content.cloneNode(true));
 
-    this.timerDisplay = null;
+    this.timerDisplayMinutes = null;
+    this.timerDisplaySeconds = null;
     this.playButton = null;
     this.pauseButton = null;
     this.replayButton = null;
@@ -126,7 +131,8 @@ class PomodoroTimer extends HTMLElement {
 
   connectedCallback() {
     if (!this.shadowRoot) return;
-    this.timerDisplay = this.shadowRoot.querySelector('#timer_display');
+    this.timerDisplayMinutes = this.shadowRoot.querySelector('#mins');
+    this.timerDisplaySeconds = this.shadowRoot.querySelector('#secs');
     this.playButton = this.shadowRoot.querySelector('#play_button');
     this.pauseButton = this.shadowRoot.querySelector('#pause_button');
     this.replayButton = this.shadowRoot.querySelector('#replay_button');
@@ -135,6 +141,35 @@ class PomodoroTimer extends HTMLElement {
     this.playButton?.addEventListener('click', () => this.onStart?.());
     this.pauseButton?.addEventListener('click', () => this.onPause?.());
     this.replayButton?.addEventListener('click', () => this.onReset?.());
+
+    this.timerDisplayMinutes?.addEventListener('change', () =>
+      this.updateTimeFromInput(),
+    );
+    this.timerDisplaySeconds?.addEventListener('change', () =>
+      this.updateTimeFromInput(),
+    );
+  }
+  updateTimeFromInput() {
+    if (!this.timerDisplayMinutes || !this.timerDisplaySeconds) return;
+
+    // 獲取輸入的值
+    const minutes = parseInt(this.timerDisplayMinutes.value, 10) || 0;
+    const seconds = parseInt(this.timerDisplaySeconds.value, 10) || 0;
+
+    // 確保範圍合法
+    const validMinutes = Math.max(0, Math.min(59, minutes));
+    const validSeconds = Math.max(0, Math.min(59, seconds));
+
+    // 更新輸入框顯示（矯正非法值）
+    this.timerDisplayMinutes.value = String(validMinutes).padStart(2, '0');
+    this.timerDisplaySeconds.value = String(validSeconds).padStart(2, '0');
+
+    // 更新內部時間（秒數）
+    this.time = validMinutes * 60 + validSeconds;
+
+    console.log(`promodoroTimer.time = ${this.time}`);
+    // 通知外部時間已更改
+    this.onChangeTime?.(this.time);
   }
 
   disconnectedCallback() {
@@ -156,8 +191,11 @@ class PomodoroTimer extends HTMLElement {
   updateDisplay() {
     const minutes = String(Math.floor(this.time / 60)).padStart(2, '0');
     const seconds = String(this.time % 60).padStart(2, '0');
-    if (this.timerDisplay) {
-      this.timerDisplay.textContent = `${minutes}:${seconds}`;
+    if (this.timerDisplayMinutes && this.timerDisplayMinutes.value != minutes) {
+      this.timerDisplayMinutes.value = minutes;
+    }
+    if (this.timerDisplaySeconds && this.timerDisplaySeconds.value != seconds) {
+      this.timerDisplaySeconds.value = seconds;
     }
   }
 
